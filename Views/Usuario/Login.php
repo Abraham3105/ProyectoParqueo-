@@ -1,11 +1,15 @@
+<?php
+// Controlador de Login
+include_once $_SERVER["DOCUMENT_ROOT"] . '/ProyectoParqueo-/Controllers/UsuarioController.php';
+?>
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
   <meta charset="UTF-8">
   <title>Iniciar Sesión</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <!-- CSS base -->
+  <!-- Estilos -->
   <link rel="stylesheet" href="../../Views/Estilos/vendor.bundle.base.css">
   <link rel="stylesheet" href="../../Views/Estilos/feather.css">
   <link rel="stylesheet" href="../../Views/Estilos/loader.css">
@@ -25,20 +29,30 @@
               </div>
               <h4>¡Bienvenido!</h4>
               <h6 class="font-weight-light">Inicie sesión para continuar.</h6>
-              <form class="pt-3" action="#" method="post" autocomplete="off">
+
+              <!-- Formulario de inicio de sesión -->
+              <form class="pt-3" action="" method="post" autocomplete="off">
                 <div class="form-group">
-                  <input type="email" class="form-control form-control-lg" name="emailUser" placeholder="Correo">
+                  <input type="email" class="form-control form-control-lg" name="emailUser" placeholder="Correo" required>
                 </div>
                 <div class="form-group">
-                  <input type="password" class="form-control form-control-lg" name="passwordUser" placeholder="Contraseña">
+                  <input type="password" class="form-control form-control-lg" name="passwordUser" placeholder="Contraseña" required>
                 </div>
                 <div class="mt-3">
-                  <a class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn" href="#">Iniciar sesión</a>
+                  <button type="submit" name="btnIniciarSesion" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">Iniciar sesión</button>
                 </div>
+
+                <?php if (isset($mensajeError)): ?>
+                <div class="alert alert-danger mt-3" role="alert">
+                  <?= $mensajeError ?>
+                </div>
+                <?php endif; ?>
+
                 <div class="text-center mt-4 font-weight-light">
                   ¿No tienes una cuenta? <a href="CrearCuenta.php" class="text-primary">Crear una</a>
                 </div>
               </form>
+
             </div>
           </div>
         </div>
