@@ -24,10 +24,9 @@ if (isset($_POST["btnIniciarSesion"])) {
 if (isset($_POST["btnRegistrarUsuario"])) {
     $nombre = $_POST["txtNombre"];
     $correo = $_POST["txtCorreo"];
-    $identificacion = $_POST["txtIdentificacion"];
     $contrasenna = $_POST["txtContrasenna"];
 
-    $respuesta = RegistrarUsuarioModel($nombre, $correo, $identificacion, $contrasenna);
+    $respuesta = RegistrarUsuarioModel($nombre, $correo, $contrasenna);
 
     if ($respuesta) {
         header("Location: ../../Views/Usuario/Login.php");

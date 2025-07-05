@@ -33,13 +33,13 @@ include_once $_SERVER["DOCUMENT_ROOT"] . '/ProyectoParqueo-/Controllers/UsuarioC
               <!-- Formulario de registro -->
               <form class="pt-3" method="post" action="" autocomplete="off">
                 <div class="form-group">
-                  <input type="text" class="form-control form-control-lg" name="nombre_completo" placeholder="Nombre completo" required>
+                  <input type="text" class="form-control form-control-lg" name="txtNombre" placeholder="Nombre completo" required>
                 </div>
                 <div class="form-group">
-                  <input type="email" class="form-control form-control-lg" name="emailUser" placeholder="Correo electrónico" required>
+                  <input type="email" class="form-control form-control-lg" name="txtCorreo" placeholder="Correo electrónico" required>
                 </div>
                 <div class="form-group">
-                  <input type="password" class="form-control form-control-lg" name="passwordUser" placeholder="Contraseña" required>
+                  <input type="password" class="form-control form-control-lg" name="txtContrasenna" placeholder="Contraseña" required>
                 </div>
                 <div class="mt-3">
                   <button type="submit" name="btnRegistrarUsuario" class="btn btn-block btn-primary btn-lg font-weight-medium auth-form-btn">Crear cuenta</button>

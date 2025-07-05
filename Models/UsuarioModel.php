@@ -3,8 +3,8 @@ function OpenDB() {
     $host = "localhost";
     $port = "1521";
     $service = "XEPDB1";
-    $user = "MNPROYECTO";
-    $password = "tu_contrasena"; // Cambia por tu contraseña
+    $user = "PROYECTO_PARQUEO";
+    $password = "parqueo123"; 
 
     $connStr = "(DESCRIPTION =
                     (ADDRESS = (PROTOCOL = TCP)(HOST = $host)(PORT = $port))
@@ -44,14 +44,13 @@ function ValidarInicioSesionModel($correo, $contrasenna) {
 }
 
 // RegistrarUsuarioModel
-function RegistrarUsuarioModel($nombre, $correo, $identificacion, $contrasenna) {
+function RegistrarUsuarioModel($nombre, $correo, $contrasenna) {
     $conn = OpenDB();
-    $sql = "BEGIN RegistrarUsuario(:nombre, :correo, :identificacion, :contrasenna); END;";
+    $sql = "BEGIN RegistrarUsuario(:nombre, :correo, :contrasenna); END;";
     $stmt = oci_parse($conn, $sql);
 
     oci_bind_by_name($stmt, ":nombre", $nombre);
     oci_bind_by_name($stmt, ":correo", $correo);
-    oci_bind_by_name($stmt, ":identificacion", $identificacion);
     oci_bind_by_name($stmt, ":contrasenna", $contrasenna);
 
     $success = oci_execute($stmt);
