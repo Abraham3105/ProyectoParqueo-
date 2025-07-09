@@ -17,7 +17,7 @@ document.getElementById("loginForm").addEventListener("submit", async function (
 
     if (response.ok) {
       alert(data.message);
-      window.location.href = "verificacion.html";
+      window.location.href = "agenda.html";
     } else {
       alert(data.message);
     }
