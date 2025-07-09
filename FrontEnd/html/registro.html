@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Registro</title>
+        <link rel="stylesheet" href="../css/estilos.css" />
+    </head>
+    <body>
+        <div class="form-container">
+            <img src="../img/parqueoLogin.jpg" alt="Logo" class="logo" />
+            <h2>Crear Cuenta</h2>
+            <p>Ingrese los datos para registrarse.</p>
+            <form id="registroForm">
+                <input type="text" id="nombre" placeholder="Nombre completo" required />
+                <input type="email" id="correo" placeholder="Correo electrónico" required />
+                <input type="password" id="contrasenna" placeholder="Contraseña" required />
+                <button type="submit">Crear cuenta</button>
+                <p class="mensaje"> ¿Ya tienes cuenta? <a class="aLoginRegister" href="login.html">Iniciar sesión</a></p>
+            </form>
+        </div>
+
+        <script src="../js/registro.js"></script>
+
+    </body>
+</html>
