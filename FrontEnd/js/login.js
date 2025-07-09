@@ -16,17 +16,8 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
     const data = await response.json();
 
     if (response.ok) {
-      Swal.fire({
-        icon: 'success',
-        title: 'Inicio exitoso',
-        text: data.message,
-        confirmButtonText: 'Continuar',
-        confirmButtonColor: '#3085d6',
-        scrollbarPadding: false,
-        heightAuto: false
-      }).then(() => {
-        window.location.href = "verificacion.html"; // A la ruta a que se envia al usuario
-      });
+      alert(data.message);
+      window.location.href = "verificacion.html";
     } else {
       Swal.fire({
         icon: 'error',
