@@ -1,66 +1,91 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 body {
-  font-family: Arial, sans-serif;
-  background-color: #f2f5fc;
+  background-color: #f0f4fa;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
 }
 
-.form-container {
-  background-color: #ffffff;
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.form-box {
+  background-color: white;
   padding: 40px;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0,0,0,0.1);
-  width: 400px;
+  border-radius: 12px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
   text-align: center;
+  width: 360px;
 }
 
-.form-container h2 {
-  margin-bottom: 10px;
-}
-
-.form-container p {
+.form-box .logo {
+  width: 60px;
   margin-bottom: 20px;
-  color: #555;
 }
 
-input {
-  width: 93.5%;
-  padding: 12px;
-  margin: 8px 0;
-  border: 1px solid #ccc;
-  border-radius: 6px;
+.form-box h2 {
+  font-size: 24px;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.form-box p {
   font-size: 14px;
-  background-color: #fff;
+  color: #777;
+  margin-bottom: 20px;
 }
 
-button {
+form input {
+  width: 100%;
+  padding: 12px 16px;
+  margin: 10px 0;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  font-size: 14px;
+  transition: border 0.2s;
+}
+
+form input:focus {
+  border-color: #ff6600;
+  outline: none;
+}
+
+form button {
   width: 100%;
   padding: 12px;
-  background-color: #fc5c0d;
+  background-color: #ff6600;
   color: white;
   border: none;
-  border-radius: 6px;
+  border-radius: 8px;
   font-size: 16px;
   cursor: pointer;
+  margin-top: 10px;
+  transition: background-color 0.3s ease;
 }
 
-button:hover {
-  background-color: #e2550c;
+form button:hover {
+  background-color: #e65500;
 }
 
-.mensaje {
-  margin-top: 20px;
-  font-size: 14px;
+a {
+  color: #ff6600;
+  text-decoration: none;
 }
 
-.logo {
-  width: 60px;
-  margin-bottom: 15px;
+a:hover {
+  text-decoration: underline;
 }
 
-.aLoginRegister{
-    text-decoration: none;
-    color: #e2550c;
+.pLoginRegistro{
+  margin-top: 15px;
 }
