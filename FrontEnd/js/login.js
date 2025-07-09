@@ -25,10 +25,10 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
         scrollbarPadding: false,
         heightAuto: false
       }).then(() => {
-        window.location.href = "verificacion.html"; // A la ruta a que se envia al usuario
+        window.location.href = "agenda.html"; // A la ruta a que se envia al usuario
       });
     } else {
-      Swal.fire({
+      Swal.fire({ 
         icon: 'error',
         title: 'Error al iniciar sesión',
         text: data.message,
