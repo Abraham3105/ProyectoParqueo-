@@ -15,7 +15,7 @@
       <li><a href="crearReservas.html">Crear Reserva</a></li>
       <li><a href="historialReservas.html">Historial</a></li>
       <li><a href="reportes.html">Reportes</a></li>
-      <li><a href="#">Catálogo</a></li>
+      <li><a href="misVehiculos.html">Mis Vehículos</a></li>
     </ul>
   </aside>
 
@@ -29,25 +29,25 @@
     <section class="agenda-container">
       <h2 class="titulo">Crear Nueva Reserva</h2>
 
-      <form class="form-reserva">
+      <form class="form-reserva" action="../Controllers/reservaController.php" method="POST">
         <div class="form-group">
           <label for="cliente">Cliente</label>
-          <input type="text" id="cliente" placeholder="Nombre del cliente" required>
+          <input type="text" id="cliente" name="cliente" placeholder="Nombre del cliente" required>
         </div>
 
         <div class="form-group">
-          <label for="vehiculo">Vehículo</label>
-          <input type="text" id="vehiculo" placeholder="Placa del vehículo" required>
+          <label for="espacio">Número de Espacio</label>
+          <input type="number" id="espacio" name="espacio" placeholder="Ej: 3" min="1" required>
         </div>
 
         <div class="form-group">
           <label for="fecha">Fecha</label>
-          <input type="date" id="fecha" required>
+          <input type="date" id="fecha" name="fecha" required>
         </div>
 
         <div class="form-group">
           <label for="hora">Hora</label>
-          <input type="time" id="hora" required>
+          <input type="time" id="hora" name="hora" required>
         </div>
 
         <button type="submit" class="btn-guardar">Guardar Reserva</button>

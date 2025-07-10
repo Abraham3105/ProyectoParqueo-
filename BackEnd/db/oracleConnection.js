@@ -9,9 +9,9 @@ async function iniciarConexion() {
       connectString: process.env.ORACLE_CONNECT_STRING,
       poolAlias: 'default',
     });
-    console.log('✅ Pool de conexión Oracle creado correctamente.');
+    console.log('Pool de conexión Oracle creado correctamente.');
   } catch (error) {
-    console.error('❌ Error al crear el pool de conexión:', error);
+    console.error('Error al crear el pool de conexión:', error);
   }
 }
 
