@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Crear Nueva Reserva</title>
-  <link rel="stylesheet" href="../css/agenda.css">
+  <link rel="stylesheet" href="../css/agenda.css" />
 </head>
 <body>
 
@@ -29,25 +29,20 @@
     <section class="agenda-container">
       <h2 class="titulo">Crear Nueva Reserva</h2>
 
-      <form class="form-reserva" action="../Controllers/reservaController.php" method="POST">
+      <form class="form-reserva" id="formReserva">
         <div class="form-group">
-          <label for="cliente">Cliente</label>
-          <input type="text" id="cliente" name="cliente" placeholder="Nombre del cliente" required>
+          <label for="cliente">ID Usuario</label>
+          <input type="number" id="cliente" name="cliente" placeholder="ID del usuario" required />
         </div>
 
         <div class="form-group">
           <label for="espacio">Número de Espacio</label>
-          <input type="number" id="espacio" name="espacio" placeholder="Ej: 3" min="1" required>
+          <input type="number" id="espacio" name="espacio" placeholder="Ej: 3" required />
         </div>
 
         <div class="form-group">
-          <label for="fecha">Fecha</label>
-          <input type="date" id="fecha" name="fecha" required>
-        </div>
-
-        <div class="form-group">
-          <label for="hora">Hora</label>
-          <input type="time" id="hora" name="hora" required>
+          <label for="monto">Monto Total</label>
+          <input type="number" id="monto" name="monto" placeholder="Ej: 2500" required />
         </div>
 
         <button type="submit" class="btn-guardar">Guardar Reserva</button>
@@ -55,5 +50,7 @@
     </section>
   </main>
 
+  <script src="../js/crearReserva.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>

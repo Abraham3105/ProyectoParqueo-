@@ -3,6 +3,7 @@ const cors = require('cors');
 const path = require('path');
 const { iniciarConexion } = require('./db/oracleConnection');
 
+
 const app = express();
 const PORT = process.env.PORT || 3000;
 
@@ -14,9 +15,15 @@ app.use(express.urlencoded({ extended: true }));
 // Conexión a Oracle
 iniciarConexion();
 
+
+
 // Rutas de la API
 const authRoutes = require('./routers/autenticacionRoutes');
 app.use('/api/auth', authRoutes);
+
+//Crear reserva
+const reservaRoutes = require('./routers/reservaRoutes');
+app.use('/api/reservas', reservaRoutes);
 
 // Servir archivos estáticos del frontend
 app.use(express.static(path.join(__dirname, '../FrontEnd')));
@@ -30,3 +37,5 @@ app.get('/', (req, res) => {
 app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
+
+
