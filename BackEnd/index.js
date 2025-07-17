@@ -25,6 +25,10 @@ app.use('/api/auth', authRoutes);
 const reservaRoutes = require('./routers/reservaRoutes');
 app.use('/api/reservas', reservaRoutes);
 
+//Crear vehiculo
+const vehiculoRoutes = require("./routers/vehiculoRoutes");
+app.use("/api/vehiculos", vehiculoRoutes);
+
 // Servir archivos estáticos del frontend
 app.use(express.static(path.join(__dirname, '../FrontEnd')));
 

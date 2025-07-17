@@ -3,7 +3,9 @@ document.getElementById("formReserva").addEventListener("submit", async (e) => {
 
   const idUsuario = document.getElementById("idUsuario").value;
   const idEspacio = document.getElementById("idEspacio").value;
-  const montoTotal = document.getElementById("montoTotal").value;
+
+
+  const montoTotal = 3500;
 
   try {
     const response = await fetch("http://localhost:3000/api/reservas/crear", {
@@ -40,3 +42,4 @@ document.getElementById("formReserva").addEventListener("submit", async (e) => {
     });
   }
 });
+
