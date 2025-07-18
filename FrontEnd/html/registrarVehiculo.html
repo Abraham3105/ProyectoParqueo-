@@ -27,7 +27,7 @@
   <section class="agenda-container">
     <h2 class="titulo">Registrar Nuevo Vehículo</h2>
 
-    <form class="form-reserva" action="procesarVehiculo.php" method="POST">
+    <form class="form-reserva" id="vehiculoForm">
       <div class="form-group">
         <label for="placa">Placa del Vehículo</label>
         <input type="text" id="placa" name="placa" placeholder="Ej: XYZ123" required>
@@ -37,11 +37,11 @@
         <label for="modelo">Modelo del Vehículo</label>
         <select id="modelo" name="modelo" required>
           <option value="">Seleccione un modelo</option>
-          <!-- Opciones cargadas dinámicamente -->
+          <!-- Se cargan desde JS -->
         </select>
       </div>
 
-      <button type="submit" class="btn-orange">Guardar Vehículo</button>
+      <button type="submit" class="btn-orange">Registrar</button>
 
       <div class="form-group mt-2">
         <a href="misVehiculos.html" class="btn btn-secondary">Volver a mis vehículos</a>
@@ -49,6 +49,7 @@
     </form>
   </section>
 </main>
-
+  <script src="../js/vehiculo.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>

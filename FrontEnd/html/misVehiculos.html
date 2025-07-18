@@ -42,46 +42,14 @@
             <th>Hoy</th>
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>1</td>
-            <td>XYZ123</td>
-            <td>Fortuner</td>
-            <td>SUV</td>
-            <td><span class="badge badge-success">Activo</span></td>
-            <td>
-              <button class="btn-warning">Editar</button>
-              <button class="btn-danger">Eliminar</button>
-            </td>
-            <td>
-              <form method="POST" action="../Controllers/usarVehiculoHoy.php">
-                <input type="hidden" name="placa" value="XYZ123">
-                <button type="submit" class="btn-naranja">Usar Hoy</button>
-              </form>
-            </td>
-          </tr>
-
-          <tr>
-            <td>2</td>
-            <td>ABC789</td>
-            <td>Corolla</td>
-            <td>Sedán</td>
-            <td><span class="badge badge-success">Activo</span></td>
-            <td>
-              <button class="btn-warning">Editar</button>
-              <button class="btn-danger">Eliminar</button>
-            </td>
-            <td>
-              <form method="POST" action="../Controllers/usarVehiculoHoy.php">
-                <input type="hidden" name="placa" value="ABC789">
-                <button type="submit" class="btn-naranja">Usar Hoy</button>
-              </form>
-            </td>
-          </tr>
+        <tbody id="tablaVehiculos">
+          <!-- Vehículos se cargan dinámicamente -->
         </tbody>
       </table>
     </section>
   </main>
+
+  <script> src="../js/misVehiculos.js" </script>
 
 </body>
 </html>

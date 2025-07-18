@@ -1,11 +1,8 @@
 document.getElementById("formReserva").addEventListener("submit", async (e) => {
   e.preventDefault();
 
-  const idUsuario = document.getElementById("idUsuario").value;
-  const idEspacio = document.getElementById("idEspacio").value;
-
-
-  const montoTotal = 3500;
+  const ID_Usuario = document.getElementById("idUsuario").value;
+  const ID_Espacio = document.getElementById("idEspacio").value;
 
   try {
     const response = await fetch("http://localhost:3000/api/reservas/crear", {
@@ -13,7 +10,7 @@ document.getElementById("formReserva").addEventListener("submit", async (e) => {
       headers: {
         "Content-Type": "application/json"
       },
-      body: JSON.stringify({ idUsuario, idEspacio, montoTotal })
+      body: JSON.stringify({ ID_Usuario, ID_Espacio })
     });
 
     const data = await response.json();
@@ -22,14 +19,14 @@ document.getElementById("formReserva").addEventListener("submit", async (e) => {
       Swal.fire({
         icon: "success",
         title: "¡Reserva guardada!",
-        text: data.message,
+        text: data.mensaje || "Reserva creada exitosamente.",
         confirmButtonColor: "#3085d6"
       });
     } else {
       Swal.fire({
         icon: "error",
         title: "Error al guardar",
-        text: data.message,
+        text: data.error || "No se pudo crear la reserva.",
         confirmButtonColor: "#d33"
       });
     }
