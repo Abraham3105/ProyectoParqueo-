@@ -1,9 +1,14 @@
 const express = require('express');
 const router = express.Router();
 
-const { crearReserva } = require('../controllers/reservaController');
+// Importa los controladores necesarios
+const { crearReserva, listarPendientes } = require('../controllers/reservaController');
 
-// Ruta para crear una reserva
+// Ruta POST para crear una nueva reserva
 router.post('/crear', crearReserva);
 
+// Ruta GET para listar todas las reservas con estado pendiente (ID_Estado = 3)
+router.get('/pendientes', listarPendientes);
+
+// Exporta el router para que pueda ser usado en server.js
 module.exports = router;

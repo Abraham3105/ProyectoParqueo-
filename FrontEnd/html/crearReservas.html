@@ -12,7 +12,7 @@
     <ul>
       <li><a href="agenda.html">Mi Agenda</a></li>
       <li><a href="reservasPendientes.html">Reservas Pendientes</a></li>
-      <li><a href="crearReservas.html">Crear Reserva</a></li>
+      <li><a href="crearReservas.html" class="activo">Crear Reserva</a></li>
       <li><a href="historialReservas.html">Historial</a></li>
       <li><a href="reportes.html">Reportes</a></li>
       <li><a href="misVehiculos.html">Mis Vehículos</a></li>
@@ -41,11 +41,22 @@
           <input type="number" id="idEspacio" name="idEspacio" placeholder="Ej: 3" min="1" required />
         </div>
 
+        <div class="form-group">
+       <label for="vehiculo">Vehículo</label>
+        <select id="vehiculo" required>
+          <option value="">Seleccione un vehículo</option>
+        </select>
+        </div>
+
         <button type="submit" class="btn-guardar">Guardar Reserva</button>
       </form>
     </section>
+    <footer class="footer">
+      <p>&copy; 2025 Sistema de Parqueo. Todos los derechos reservados.</p>
+    </footer>
   </main>
 
+  <!-- Scripts -->
   <script src="../js/reserva.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>

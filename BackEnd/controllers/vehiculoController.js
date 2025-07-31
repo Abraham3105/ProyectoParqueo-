@@ -66,7 +66,45 @@ const obtenerModelosVehiculos = async (req, res) => {
     res.status(500).json({ message: "Error al obtener modelos de vehículos" });
   }
 };
+// Listar vehículos por usuario
+const listarVehiculosPorUsuario = async (req, res) => {
+  const idUsuario = req.params.idUsuario;
+
+  try {
+    const connection = await OpenDB();
+
+    const result = await connection.execute(
+      `BEGIN SP_LISTAR_VEHICULOS_USUARIO(:idUsuario, :cursor); END;`,
+      {
+        idUsuario: { val: idUsuario, dir: oracledb.BIND_IN },
+        cursor: { dir: oracledb.BIND_OUT, type: oracledb.CURSOR }
+      }
+    );
+
+    const resultSet = result.outBinds.cursor;
+    const rows = await resultSet.getRows();
+    await resultSet.close();
+    await connection.close();
+
+    const data = rows.map(row => ({
+      idVehiculo: row[0],
+      placa: row[1],
+      modelo: row[2],
+      tipo: row[3],
+      estado: row[4]
+    }));
+
+    res.status(200).json(data);
+  } catch (error) {
+    console.error("Error al listar vehículos:", error);
+    res.status(500).json({ message: "Error al listar vehículos del usuario" });
+  }
+};
 
 
-module.exports = { ingresarVehiculo, obtenerModelosVehiculos };
+module.exports = {
+  ingresarVehiculo,
+  obtenerModelosVehiculos,
+  listarVehiculosPorUsuario
+};
 
