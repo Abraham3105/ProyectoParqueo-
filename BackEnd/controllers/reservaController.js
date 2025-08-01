@@ -3,7 +3,7 @@ const { OpenDB } = require('../db/oracleConnection');
 
 // CREAR RESERVA
 const crearReserva = async (req, res) => {
-  const { ID_Usuario, ID_Espacio } = req.body;
+  const { ID_Usuario, ID_Espacio, ID_Vehiculo } = req.body;
 
   try {
     const connection = await OpenDB();
@@ -11,12 +11,13 @@ const crearReserva = async (req, res) => {
     const result = await connection.execute(
       `
       BEGIN
-        SP_CREAR_RESERVA(:ID_Usuario, :ID_Espacio, :resultado);
+        SP_CREAR_RESERVA(:ID_Usuario, :ID_Espacio, :ID_Vehiculo, :resultado);
       END;
       `,
       {
         ID_Usuario: { val: ID_Usuario, dir: oracledb.BIND_IN },
         ID_Espacio: { val: ID_Espacio, dir: oracledb.BIND_IN },
+        ID_Vehiculo: { val: ID_Vehiculo, dir: oracledb.BIND_IN },
         resultado: { dir: oracledb.BIND_OUT, type: oracledb.STRING, maxSize: 100 }
       }
     );
@@ -46,7 +47,7 @@ const listarPendientes = async (req, res) => {
       `SELECT R.ID_RESERVA, U.NOMBRE AS nombre_usuario, V.PLACA AS placa_vehiculo, R.MONTO_TOTAL
        FROM FIDE_RESERVAS_TB R
        JOIN FIDE_USUARIO_TB U ON R.ID_USUARIO = U.ID_USUARIO
-       JOIN FIDE_VEHICULO_TB V ON V.ID_USUARIO = R.ID_USUARIO
+       JOIN FIDE_VEHICULO_TB V ON V.ID_VEHICULO = R.ID_VEHICULO
        WHERE R.ID_ESTADO = 3`
     );
 
@@ -66,8 +67,38 @@ const listarPendientes = async (req, res) => {
   }
 };
 
+// LISTAR RESERVAS ACTIVAS
+const listarReservasActivas = async (req, res) => {
+  try {
+    const connection = await OpenDB();
+
+    const result = await connection.execute(
+      `SELECT R.ID_RESERVA, U.NOMBRE AS nombre_usuario, V.PLACA AS placa_vehiculo, R.MONTO_TOTAL
+       FROM FIDE_RESERVAS_TB R
+       JOIN FIDE_USUARIO_TB U ON R.ID_USUARIO = U.ID_USUARIO
+       JOIN FIDE_VEHICULO_TB V ON V.ID_VEHICULO = R.ID_VEHICULO
+       WHERE R.ID_ESTADO = 1`
+    );
+
+    const reservas = result.rows.map(row => ({
+      id_reserva: row[0],
+      nombre_usuario: row[1],
+      placa_vehiculo: row[2],
+      monto_total: row[3]
+    }));
+
+    await connection.close();
+    res.status(200).json(reservas);
+  } catch (error) {
+    console.error("Error al listar reservas activas:", error);
+    res.status(500).json({ error: "Error al obtener reservas activas." });
+  }
+};
+
+
 module.exports = {
   crearReserva,
-  listarPendientes
+  listarPendientes,
+  listarReservasActivas
 };
 

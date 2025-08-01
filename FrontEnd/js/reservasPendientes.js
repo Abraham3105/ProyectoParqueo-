@@ -1,8 +1,9 @@
-// reservasPendientes.js
-
 document.addEventListener("DOMContentLoaded", async () => {
   const tablaBody = document.getElementById("tablaReservasBody");
+  const modal = document.getElementById("modalPago");
+  const formPago = document.getElementById("formPago");
 
+  // Cargar reservas pendientes
   try {
     const response = await fetch("http://localhost:3000/api/reservas/pendientes");
     const reservas = await response.json();
@@ -31,27 +32,19 @@ document.addEventListener("DOMContentLoaded", async () => {
   } catch (error) {
     console.error("Error al cargar reservas pendientes:", error);
   }
-});
 
-// Función global para abrir modal y pasar datos
-function abrirModal(idReserva, monto) {
-  document.getElementById("modalPago").style.display = "block";
-  document.getElementById("idReserva").value = idReserva;
-  document.getElementById("monto").value = monto;
-}
-
-// Cierra el modal
-function cerrarModal() {
-  document.getElementById("modalPago").style.display = "none";
-}
-
-// Envío del formulario
-document.addEventListener("submit", async (e) => {
-  if (e.target.closest("form")) {
+  // Envío del formulario de pago
+  formPago.addEventListener("submit", async (e) => {
     e.preventDefault();
+
     const idReserva = document.getElementById("idReserva").value;
     const metodo = document.getElementById("metodo").value;
     const monto = document.getElementById("monto").value;
+
+    if (!metodo || !idReserva) {
+      Swal.fire("Campos incompletos", "Seleccione método de pago", "warning");
+      return;
+    }
 
     try {
       const res = await fetch("http://localhost:3000/api/pagos", {
@@ -59,19 +52,35 @@ document.addEventListener("submit", async (e) => {
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
           id_reserva: idReserva,
-          id_metodo_pago: metodo,
-          id_descuento: null, // si luego agregás descuento lo cambiás aquí
+          id_metodo_pago: parseInt(metodo),
+          id_descuento: null
         }),
       });
 
       const data = await res.json();
-      if (!data.ok) return alert("Error: " + data.mensaje);
 
-      alert(`Pago exitoso. Total: ${data.total}, Factura #: ${data.id_factura}`);
-      location.reload();
+      if (res.ok) {
+        Swal.fire("¡Pago exitoso!", `Factura #: ${data.id_factura}`, "success");
+        cerrarModal();
+        setTimeout(() => location.reload(), 1500);
+      } else {
+        Swal.fire("Error", data.error || "No se pudo realizar el pago", "error");
+      }
     } catch (err) {
       console.error("Error al procesar el pago:", err);
-      alert("Hubo un error al procesar el pago.");
+      Swal.fire("Error del servidor", "No se pudo conectar al backend", "error");
     }
-  }
+  });
 });
+
+// Mostrar modal con datos
+function abrirModal(idReserva, monto) {
+  document.getElementById("modalPago").style.display = "block";
+  document.getElementById("idReserva").value = idReserva;
+  document.getElementById("monto").value = monto;
+}
+
+// Ocultar modal
+function cerrarModal() {
+  document.getElementById("modalPago").style.display = "none";
+}

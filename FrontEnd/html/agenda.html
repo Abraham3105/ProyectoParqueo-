@@ -35,22 +35,12 @@
             <th>N° Reserva</th>
             <th>Cliente</th>
             <th>Espacio</th>
-            <th>Placa</th>
-            <th>Fecha de reserva</th>
+            <th>Placa</th>                       
             <th>Pago</th>
-  
           </tr>
         </thead>
-        <tbody>
-          <tr>
-            <td>R-001</td>
-            <td>Jose</td>
-            <td>2</td>
-            <td>MK1241</td>
-            <td>16/01/2024</td>
-            <td>3000</td>
-            <td><button class="btn-historial">Enviar a Historial</button></td>
-          </tr>
+        <tbody id="tablaReservasActivasBody">
+          <!-- Reservas activas se insertarán desde reservasActivas.js -->
         </tbody>
       </table>
 
@@ -60,13 +50,15 @@
         <button>Siguiente</button>
       </div>
 
-      <p class="registro-info">Mostrando registros del 1 al 1 de un total de 1 registros</p>
+      <p class="registro-info">Mostrando registros dinámicos</p>
     </section>
+
     <footer class="footer">
       <p>&copy; 2025 Sistema de Parqueo. Todos los derechos reservados.</p>
     </footer>
   </main>
 
-  </body>
+  <!-- Script que carga dinámicamente las reservas activas -->
+  <script src="../js/reservasActivas.js"></script>
+</body>
 </html>
-
