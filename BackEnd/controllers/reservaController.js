@@ -40,61 +40,71 @@ const crearReserva = async (req, res) => {
 
 // LISTAR RESERVAS PENDIENTES
 const listarPendientes = async (req, res) => {
+  const idUsuario = req.params.idUsuario;
+
   try {
     const connection = await OpenDB();
 
     const result = await connection.execute(
-      `SELECT R.ID_RESERVA, U.NOMBRE AS nombre_usuario, V.PLACA AS placa_vehiculo, R.MONTO_TOTAL
-       FROM FIDE_RESERVAS_TB R
-       JOIN FIDE_USUARIO_TB U ON R.ID_USUARIO = U.ID_USUARIO
-       JOIN FIDE_VEHICULO_TB V ON V.ID_VEHICULO = R.ID_VEHICULO
-       WHERE R.ID_ESTADO = 3`
+      `BEGIN SP_LISTAR_RESERVAS_PENDIENTES(:idUsuario, :cursor); END;`,
+      {
+        idUsuario: parseInt(idUsuario),
+        cursor: { dir: oracledb.BIND_OUT, type: oracledb.CURSOR }
+      }
     );
 
-    const reservas = result.rows.map(row => ({
+    const resultSet = result.outBinds.cursor;
+    const rows = await resultSet.getRows();
+    await resultSet.close();
+    await connection.close();
+
+    const reservas = rows.map(row => ({
       id_reserva: row[0],
       nombre_usuario: row[1],
-      placa_vehiculo: row[2],
-      monto_total: row[3]
+      placa_vehiculo: row[3], // columna 3 es ID_Espacio
+      monto_total: row[4]
     }));
 
-    await connection.close();
     res.status(200).json(reservas);
-
   } catch (error) {
-    console.error("Error al listar reservas pendientes:", error);
-    res.status(500).json({ error: "Error al obtener reservas pendientes." });
+    console.error("Error al listar reservas pendientes por usuario:", error);
+    res.status(500).json({ error: "Error al obtener reservas del usuario." });
   }
 };
 
 // LISTAR RESERVAS ACTIVAS
 const listarReservasActivas = async (req, res) => {
+const idUsuario = req.params.idUsuario;
+
   try {
     const connection = await OpenDB();
 
     const result = await connection.execute(
-      `SELECT R.ID_RESERVA, U.NOMBRE AS nombre_usuario, V.PLACA AS placa_vehiculo, R.MONTO_TOTAL
-       FROM FIDE_RESERVAS_TB R
-       JOIN FIDE_USUARIO_TB U ON R.ID_USUARIO = U.ID_USUARIO
-       JOIN FIDE_VEHICULO_TB V ON V.ID_VEHICULO = R.ID_VEHICULO
-       WHERE R.ID_ESTADO = 1`
+      `BEGIN SP_LISTAR_RESERVAS_ACTIVAS(:idUsuario, :cursor); END;`,
+      {
+        idUsuario: parseInt(idUsuario),
+        cursor: { dir: oracledb.BIND_OUT, type: oracledb.CURSOR }
+      }
     );
 
-    const reservas = result.rows.map(row => ({
+    const resultSet = result.outBinds.cursor;
+    const rows = await resultSet.getRows();
+    await resultSet.close();
+    await connection.close();
+
+    const reservas = rows.map(row => ({
       id_reserva: row[0],
       nombre_usuario: row[1],
-      placa_vehiculo: row[2],
-      monto_total: row[3]
+      placa_vehiculo: row[3],
+      monto_total: row[4]
     }));
 
-    await connection.close();
     res.status(200).json(reservas);
   } catch (error) {
-    console.error("Error al listar reservas activas:", error);
-    res.status(500).json({ error: "Error al obtener reservas activas." });
+    console.error("Error al listar reservas activas por usuario:", error);
+    res.status(500).json({ error: "Error al obtener reservas activas del usuario." });
   }
 };
-
 
 module.exports = {
   crearReserva,

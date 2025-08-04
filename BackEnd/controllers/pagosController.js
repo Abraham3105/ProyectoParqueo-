@@ -9,15 +9,7 @@ const pagarReserva = async (req, res) => {
 
     const result = await connection.execute(
       `BEGIN
-         SP_PAGAR_RESERVA(
-           :p_id_reserva,
-           :p_id_metodo_pago,
-           :p_id_descuento,
-           :p_id_pago,
-           :p_id_factura,
-           :p_total_cobrado,
-           :p_resultado
-         );
+         SP_PAGAR_RESERVA(:p_id_reserva, :p_id_metodo_pago, :p_id_descuento, :p_id_pago, :p_id_factura, :p_total_cobrado, :p_resultado);
        END;`,
       {
         p_id_reserva:     { val: id_reserva, dir: oracledb.BIND_IN },

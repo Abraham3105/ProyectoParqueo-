@@ -16,6 +16,8 @@ document.getElementById("loginForm").addEventListener("submit", async (e) => {
     const data = await response.json();
 
     if (response.ok) {
+      localStorage.setItem("id_usuario", data.idUsuario);
+
       Swal.fire({
         icon: 'success',
         title: 'Inicio exitoso',

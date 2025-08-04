@@ -39,7 +39,7 @@ const registrar = async (req, res) => {
   }
 };
 
-// LOGIN DE USUARIO
+// LOGIN DE USUARIO (actualizado con ID)
 const login = async (req, res) => {
   const { correo, contrasenna } = req.body;
 
@@ -48,21 +48,26 @@ const login = async (req, res) => {
 
     const result = await connection.execute(
       `BEGIN
-         SP_VERIFICAR_LOGIN(:correo, :contrasenna, :resultado);
+         SP_VERIFICAR_LOGIN(:correo, :contrasenna, :resultado, :idUsuario);
        END;`,
       {
         correo: { val: correo, dir: oracledb.BIND_IN, type: oracledb.STRING },
         contrasenna: { val: contrasenna, dir: oracledb.BIND_IN, type: oracledb.STRING },
-        resultado: { dir: oracledb.BIND_OUT, type: oracledb.STRING, maxSize: 50 }
+        resultado: { dir: oracledb.BIND_OUT, type: oracledb.STRING, maxSize: 50 },
+        idUsuario: { dir: oracledb.BIND_OUT, type: oracledb.NUMBER }
       }
     );
 
     await connection.close();
 
     const estado = result.outBinds.resultado;
+    const idUsuario = result.outBinds.idUsuario;
 
     if (estado === 'LOGIN EXITOSO') {
-      res.status(200).json({ message: 'Inicio de sesión exitoso.' });
+      res.status(200).json({
+        message: 'Inicio de sesión exitoso.',
+        idUsuario: idUsuario // ← importante para frontend
+      });
     } else if (estado === 'CORREO NO ENCONTRADO') {
       res.status(401).json({ message: 'El correo no está registrado.' });
     } else if (estado === 'CONTRASEÑA INCORRECTA') {

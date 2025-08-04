@@ -36,6 +36,9 @@ app.use("/api/listarvehiculo", listarVehiculoRoutes);
 const pagosRoutes = require('./routers/pagosRoutes');
 app.use('/api/pagos', pagosRoutes);
 
+//Reportes
+const reportesRoutes = require('./routers/reportesRoutes');
+app.use('/api/reportes', reportesRoutes);
 
 // Servir archivos estáticos del frontend
 app.use(express.static(path.join(__dirname, '../FrontEnd')));

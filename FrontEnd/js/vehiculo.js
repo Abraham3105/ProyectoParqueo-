@@ -12,7 +12,7 @@ document.addEventListener("DOMContentLoaded", async () => {
       const option = document.createElement("option");
       option.value = idModelo;
       option.dataset.tipo = idTipoVehiculo;
-      option.textContent = descripcion; // Modelo - Tipo
+      option.textContent = descripcion;
       modeloSelect.appendChild(option);
     });
   } catch (err) {
@@ -23,10 +23,15 @@ document.addEventListener("DOMContentLoaded", async () => {
   vehiculoForm.addEventListener("submit", async (e) => {
     e.preventDefault();
 
-    const idUsuario = 1; // puedes ajustarlo desde sesión
+    const idUsuario = localStorage.getItem("id_usuario"); // 🔸 ID desde sesión
     const idModelo = modeloSelect.value;
     const idTipoVehiculo = modeloSelect.options[modeloSelect.selectedIndex].dataset.tipo;
     const placa = document.getElementById("placa").value;
+
+    if (!idUsuario || isNaN(parseInt(idUsuario))) {
+      Swal.fire("Error", "Sesión inválida. Por favor vuelva a iniciar sesión.", "error");
+      return;
+    }
 
     try {
       const response = await fetch("http://localhost:3000/api/vehiculos/crear", {
@@ -46,10 +51,9 @@ document.addEventListener("DOMContentLoaded", async () => {
           showConfirmButton: false
         });
 
-  
-        tipoSelect.selectedIndex = 0;
-        modeloInput.value = "";
-        placaInput.value = "";
+        // Limpiar campos
+        modeloSelect.selectedIndex = 0;
+        document.getElementById("placa").value = "";
       } else {
         Swal.fire("Error", data.message, "error");
       }

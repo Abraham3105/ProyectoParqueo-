@@ -3,9 +3,23 @@ document.addEventListener("DOMContentLoaded", async () => {
   const modal = document.getElementById("modalPago");
   const formPago = document.getElementById("formPago");
 
-  // Cargar reservas pendientes
+  const idUsuario = localStorage.getItem("id_usuario");
+
+  // Validar ID antes de hacer la petición
+  if (!idUsuario || isNaN(idUsuario)) {
+    console.error("ID de usuario no válido o no existe:", idUsuario);
+    tablaBody.innerHTML = `
+      <tr>
+        <td colspan="5" style="text-align:center; color:red;">
+          Sesión no válida. Por favor, inicie sesión.
+        </td>
+      </tr>`;
+    return;
+  }
+
+  // Cargar reservas pendientes por ID de usuario
   try {
-    const response = await fetch("http://localhost:3000/api/reservas/pendientes");
+    const response = await fetch(`http://localhost:3000/api/reservas/pendientes/${idUsuario}`);
     const reservas = await response.json();
 
     if (!reservas.length) {
@@ -22,7 +36,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         <td>${reserva.nombre_usuario}</td>
         <td>${reserva.placa_vehiculo}</td>
         <td>
-          <button class="btn-historial" onclick="abrirModal('${reserva.id_reserva}', ${reserva.monto_total})">
+          <button class="btn-historial" onclick="abrirModal('${reserva.id_reserva}', '${reserva.monto_total}')">
             Confirmar
           </button>
         </td>
