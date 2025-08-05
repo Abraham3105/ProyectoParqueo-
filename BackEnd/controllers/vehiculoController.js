@@ -3,37 +3,35 @@ const { OpenDB } = require("../db/oracleConnection");
 
 // Registrar vehículo
 const ingresarVehiculo = async (req, res) => {
-  const { idModelo, placa, idUsuario } = req.body;
+  const { id_modelo, placa, id_usuario } = req.body;
 
   try {
     const connection = await OpenDB();
 
     const result = await connection.execute(
-    `BEGIN
-      PKG_PARQUEO.SP_INGRESAR_VEHICULO(:idModelo, :placa, :idUsuario, :resultado);
-    END;`,
-    {
+      `BEGIN
+         SP_INGRESAR_VEHICULO(:id_modelo, :placa, :id_usuario, :resultado);
+       END;`,
+      {
+        id_modelo: { val: id_modelo, dir: oracledb.BIND_IN, type: oracledb.NUMBER },
+        placa: { val: placa, dir: oracledb.BIND_IN, type: oracledb.STRING },
+        id_usuario: { val: id_usuario, dir: oracledb.BIND_IN, type: oracledb.NUMBER },
+        resultado: { dir: oracledb.BIND_OUT, type: oracledb.STRING, maxSize: 100 }
+      }
+    );
 
-      idModelo: { val: idModelo, dir: oracledb.BIND_IN },
-      placa: { val: placa, dir: oracledb.BIND_IN },
-      idUsuario: { val: idUsuario, dir: oracledb.BIND_IN },
-      resultado: { dir: oracledb.BIND_OUT, type: oracledb.STRING, maxSize: 100 }
-    }
-  );
+    const mensaje = result.outBinds.resultado;
 
-    await connection.commit();
-    await connection.close();
-
-    const estado = result.outBinds.resultado;
-
-    if (estado === "VEHICULO_REGISTRADO") {
-      res.status(200).json({ message: "Vehículo registrado correctamente." });
+    if (mensaje === 'VEHICULO_REGISTRADO') {
+      res.status(200).json({ ok: true, mensaje });
     } else {
-      res.status(400).json({ message: estado });
+      res.status(400).json({ ok: false, mensaje });
     }
+
+    await connection.close();
   } catch (error) {
     console.error("Error al registrar vehículo:", error);
-    res.status(500).json({ message: "Error en el servidor al registrar el vehículo." });
+    res.status(500).json({ ok: false, mensaje: error.message });
   }
 };
 

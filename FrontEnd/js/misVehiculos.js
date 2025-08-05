@@ -37,11 +37,7 @@ document.addEventListener("DOMContentLoaded", async () => {
         <td>${vehiculo.placa}</td>
         <td>${vehiculo.modelo}</td>
         <td>${vehiculo.tipo}</td>
-        <td><span class="badge badge-success">${vehiculo.estado}</span></td>
-        <td>
-          <button class="btn-warning">Editar</button>
-          <button class="btn-danger">Eliminar</button>
-        </td>`;
+        <td><span class="badge badge-success">${vehiculo.estado}</span></td>`;
       tabla.appendChild(fila);
     });
   } catch (err) {
