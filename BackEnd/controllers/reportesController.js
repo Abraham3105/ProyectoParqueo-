@@ -12,7 +12,7 @@ const obtenerCantidadReservas = async (req, res) => {
   try {
     const connection = await OpenDB();
     const result = await connection.execute(
-      `BEGIN :cantidad := FN_CANTIDAD_RESERVAS_USUARIO(:id_usuario); END;`,
+      `BEGIN :cantidad := PKG_PARQUEO.FN_CANTIDAD_RESERVAS_USUARIO(:id_usuario); END;`,
       {
         id_usuario: { val: id_usuario, dir: oracledb.BIND_IN },
         cantidad: { dir: oracledb.BIND_OUT, type: oracledb.NUMBER }
@@ -37,7 +37,7 @@ const obtenerCantidadVehiculos = async (req, res) => {
   try {
     const connection = await OpenDB();
     const result = await connection.execute(
-      `BEGIN :cantidad := FN_CANTIDAD_VEHICULOS_USUARIO(:id_usuario); END;`,
+      `BEGIN :cantidad := PKG_PARQUEO.FN_CANTIDAD_VEHICULOS_USUARIO(:id_usuario); END;`,
       {
         id_usuario: { val: id_usuario, dir: oracledb.BIND_IN },
         cantidad: { dir: oracledb.BIND_OUT, type: oracledb.NUMBER }

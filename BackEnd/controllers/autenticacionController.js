@@ -10,7 +10,7 @@ const registrar = async (req, res) => {
 
     const result = await connection.execute(
       `BEGIN
-         SP_REGISTRAR_USUARIO(:nombre, :correo, :contrasenna, :resultado);
+         PKG_PARQUEO.SP_REGISTRAR_USUARIO(:nombre, :correo, :contrasenna, :resultado);
        END;`,
       {
         nombre: { val: nombre, dir: oracledb.BIND_IN, type: oracledb.STRING },
@@ -48,7 +48,7 @@ const login = async (req, res) => {
 
     const result = await connection.execute(
       `BEGIN
-         SP_VERIFICAR_LOGIN(:correo, :contrasenna, :resultado, :idUsuario);
+         PKG_PARQUEO.SP_VERIFICAR_LOGIN(:correo, :contrasenna, :resultado, :idUsuario);
        END;`,
       {
         correo: { val: correo, dir: oracledb.BIND_IN, type: oracledb.STRING },

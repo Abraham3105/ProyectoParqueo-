@@ -11,7 +11,7 @@ const crearReserva = async (req, res) => {
     const result = await connection.execute(
       `
       BEGIN
-        SP_CREAR_RESERVA(:ID_Usuario, :ID_Espacio, :ID_Vehiculo, :resultado);
+        PKG_PARQUEO.SP_CREAR_RESERVA(:ID_Usuario, :ID_Espacio, :ID_Vehiculo, :resultado);
       END;
       `,
       {
@@ -46,7 +46,7 @@ const listarPendientes = async (req, res) => {
     const connection = await OpenDB();
 
     const result = await connection.execute(
-      `BEGIN SP_LISTAR_RESERVAS_PENDIENTES(:idUsuario, :cursor); END;`,
+      `BEGIN PKG_PARQUEO.SP_LISTAR_RESERVAS_PENDIENTES(:idUsuario, :cursor); END;`,
       {
         idUsuario: parseInt(idUsuario),
         cursor: { dir: oracledb.BIND_OUT, type: oracledb.CURSOR }
@@ -80,7 +80,7 @@ const idUsuario = req.params.idUsuario;
     const connection = await OpenDB();
 
     const result = await connection.execute(
-      `BEGIN SP_LISTAR_RESERVAS_ACTIVAS(:idUsuario, :cursor); END;`,
+      `BEGIN PKG_PARQUEO.SP_LISTAR_RESERVAS_ACTIVAS(:idUsuario, :cursor); END;`,
       {
         idUsuario: parseInt(idUsuario),
         cursor: { dir: oracledb.BIND_OUT, type: oracledb.CURSOR }

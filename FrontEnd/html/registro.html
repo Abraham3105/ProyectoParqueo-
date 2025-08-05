@@ -1,27 +1,52 @@
 <!DOCTYPE html>
 <html lang="es">
-    <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Crear Cuenta</title>
-        <link rel="stylesheet" href="../css/estilos.css">
-    </head>
-    <body>
-        <div class="container">
-            <div class="form-box">
-                <img src="../img/parqueoLogin.jpg" alt="Logo" class="logo">
-                <h2>Crear Cuenta</h2>
-                <p>Ingrese los datos para registrarse.</p>
-                <form id="registroForm">
-                    <input type="text" id="nombre" placeholder="Nombre completo" required />
-                    <input type="email" id="correo" placeholder="Correo electrónico" required />
-                    <input type="password" id="contrasenna" placeholder="Contraseña" required />
-                    <button type="submit">Crear cuenta</button>
-                </form>
-                <p class="pLoginRegistro">¿Ya tienes cuenta? <a href="login.html">Iniciar sesión</a></p>
-            </div>
-        </div>
-        <script src="../js/registro.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    </body>
+<head>
+  <meta charset="UTF-8">
+  <title>Módulo de Reportes</title>
+  <link rel="stylesheet" href="../css/agenda.css">
+</head>
+<body>
+
+<aside class="sidebar">
+  <ul>
+     <li><a href="agenda.html">Mi Agenda</a></li>
+     <li><a href="reservasPendientes.html">Reservas Pendientes</a></li>
+     <li><a href="crearReservas.html">Crear Reserva</a></li>
+     <li><a href="reportes.html">Reportes</a></li>
+     <li><a href="misVehiculos.html">Mis Vehículos</a></li>
+  </ul>
+</aside>
+
+<main class="main-content">
+    <header class="navbar">
+    <div class="logo-container">
+        <img src="../img/parqueoLogin.jpg" alt="Logo" class="logo-img">
+        <span class="logo-text">PARQUEOS_CR</span>
+    </div>
+
+    </header>
+
+  <section class="agenda-container reportes-container">
+    <h2 class="reportes-titulo">Módulo de Reportes</h2>
+    <p class="reportes-subtitulo">Tu usuario cuenta con estos resúmenes:</p>
+
+    <div class="reportes-cards">
+      <div class="reportes-card">
+        <h3>Vehículos registrados</h3>
+        <p id="cantidadVehiculos">0</p>
+      </div>
+      <div class="reportes-card">
+        <h3>Reservas realizadas</h3>
+        <p id="cantidadReservas">0</p>
+      </div>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <p>&copy; 2025 Sistema de Parqueo. Todos los derechos reservados.</p>
+  </footer>
+</main>
+
+<script src="../js/reportes.js"></script>
+</body>
 </html>

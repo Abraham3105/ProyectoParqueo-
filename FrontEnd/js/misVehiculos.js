@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", async () => {
   const tabla = document.getElementById("tablaVehiculos");
   const idUsuario = localStorage.getItem("id_usuario");
 
-  // Validación de sesión
+
   if (!idUsuario || isNaN(parseInt(idUsuario))) {
     console.warn("ID de usuario no válido o no existe:", idUsuario);
     tabla.innerHTML = `

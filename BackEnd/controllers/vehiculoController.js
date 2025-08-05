@@ -10,7 +10,7 @@ const ingresarVehiculo = async (req, res) => {
 
     const result = await connection.execute(
     `BEGIN
-      SP_INGRESAR_VEHICULO(:idModelo, :placa, :idUsuario, :resultado);
+      PKG_PARQUEO.SP_INGRESAR_VEHICULO(:idModelo, :placa, :idUsuario, :resultado);
     END;`,
     {
 
@@ -43,7 +43,7 @@ const obtenerModelosVehiculos = async (req, res) => {
     const connection = await OpenDB();
 
     const result = await connection.execute(
-      `BEGIN SP_OBTENER_MODELOS(:cursor); END;`,
+      `BEGIN PKG_PARQUEO.SP_OBTENER_MODELOS(:cursor); END;`,
       {
         cursor: { dir: oracledb.BIND_OUT, type: oracledb.CURSOR }
       }
@@ -66,6 +66,7 @@ const obtenerModelosVehiculos = async (req, res) => {
     res.status(500).json({ message: "Error al obtener modelos de vehículos" });
   }
 };
+
 // Listar vehículos por usuario
 const listarVehiculosPorUsuario = async (req, res) => {
   const idUsuario = req.params.idUsuario;
@@ -74,15 +75,15 @@ const listarVehiculosPorUsuario = async (req, res) => {
     const connection = await OpenDB();
 
     const result = await connection.execute(
-      `BEGIN SP_LISTAR_VEHICULOS_USUARIO(:idUsuario, :cursor); END;`,
+      `BEGIN PKG_PARQUEO.SP_LISTAR_VEHICULOS_USUARIO(:idUsuario, :cursor); END;`,
       {
-        idUsuario: { val: idUsuario, dir: oracledb.BIND_IN },
+        idUsuario: { val: Number(idUsuario), dir: oracledb.BIND_IN, type: oracledb.NUMBER },
         cursor: { dir: oracledb.BIND_OUT, type: oracledb.CURSOR }
       }
     );
 
     const resultSet = result.outBinds.cursor;
-    const rows = await resultSet.getRows();
+    const rows = await resultSet.getRows(); // podés pasarle un número, ej. getRows(100)
     await resultSet.close();
     await connection.close();
 

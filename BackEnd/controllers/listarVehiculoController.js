@@ -8,7 +8,7 @@ const listarVehiculosPorUsuario = async (req, res) => {
     const connection = await OpenDB();
 
     const result = await connection.execute(
-      `BEGIN SP_LISTAR_VEHICULOS_USUARIO(:idUsuario, :cursor); END;`,
+      `BEGIN PKG_PARQUEO.SP_LISTAR_VEHICULOS_USUARIO(:idUsuario, :cursor); END;`,
       {
         idUsuario: { val: idUsuario, dir: oracledb.BIND_IN },
         cursor: { dir: oracledb.BIND_OUT, type: oracledb.CURSOR }

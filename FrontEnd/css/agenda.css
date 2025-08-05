@@ -43,7 +43,7 @@ body {
 }
 
 .sidebar a:hover {
-  color: #007bff;
+  color: #0d1014;
 }
 
 /* Contenido principal */
@@ -67,7 +67,7 @@ body {
 }
 
 .logo img {
-  height: 30px;
+  height: 50px;
 }
 
 .user-email {
@@ -75,6 +75,11 @@ body {
   color: #888;
 }
 
+.logo-text {
+  font-size: 20px;
+  font-weight: bold;
+  color: #e65c00;
+}
 /* Contenedor de agenda */
 .agenda-container {
   padding: 2rem;
@@ -440,4 +445,91 @@ input, select {
   color: #333;
   font-size: 18px;
   box-shadow: 0 -1px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* ===== Estilo exclusivo para Reportes ===== */
+
+.reportes-container {
+  background-color: #f9f9fb;
+  padding: 30px;
+  border-radius: 10px;
+}
+
+.reportes-titulo {
+  font-size: 28px;
+  color: #333;
+  margin-bottom: 10px;
+}
+
+.reportes-subtitulo {
+  font-size: 16px;
+  color: #666;
+  margin-bottom: 30px;
+}
+
+.reportes-cards {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+.reportes-card {
+  background-color: white;
+  padding: 25px 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  width: 250px;
+  text-align: center;
+  transition: transform 0.2s ease;
+}
+
+.reportes-card:hover {
+  transform: translateY(-5px);
+}
+
+.reportes-card h3 {
+  font-size: 18px;
+  color: #e65c00;
+  margin-bottom: 10px;
+}
+
+.reportes-card p {
+  font-size: 36px;
+  color: #333;
+  font-weight: bold;
+  margin: 0;
+}
+
+/* Sidebar general */
+.sidebar {
+  background-color: #f5f5f5;
+  padding: 20px;
+  height: 100vh;
+  box-shadow: 2px 0 5px rgba(0,0,0,0.1);
+}
+
+/* Lista de navegación */
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* Estilo para los enlaces */
+.sidebar ul li a {
+  display: block;
+  background-color: #e65c00;
+  color: white;
+  text-decoration: none;
+  padding: 12px 15px;
+  margin: 10px 0;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
+/* Hover */
+.sidebar ul li a:hover {
+  background-color: #cf4f00;
+  transform: translateX(5px);
 }
