@@ -53,4 +53,7 @@ app.listen(PORT, () => {
   console.log(`Servidor corriendo en http://localhost:${PORT}`);
 });
 
-
+app.get('/logout', (req, res) => {
+    req.session.destroy();
+    res.redirect('/login'); // o la ruta que tengas para el login
+});

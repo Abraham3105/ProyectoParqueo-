@@ -44,3 +44,9 @@ document.addEventListener("DOMContentLoaded", async () => {
     tablaBody.appendChild(fila);
   }
 });
+
+document.getElementById("logoutBtn")?.addEventListener("click", () => {
+  localStorage.clear();      // Limpia todo lo del usuario
+  sessionStorage.clear();
+  window.location.href = "/html/login.html"; // Redirige al login
+});

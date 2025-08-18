@@ -61,12 +61,12 @@ const listarPendientes = async (req, res) => {
     const reservas = rows.map(row => ({
       id_reserva: row[0],
       nombre_usuario: row[1],
-      placa_vehiculo: row[3], // columna 3 es ID_Espacio
+      placa_vehiculo: row[3], 
       monto_total: row[4]
     }));
 
     res.status(200).json(reservas);
-  } catch (error) {
+  } catch (error) { 
     console.error("Error al listar reservas pendientes por usuario:", error);
     res.status(500).json({ error: "Error al obtener reservas del usuario." });
   }

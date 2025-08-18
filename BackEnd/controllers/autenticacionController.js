@@ -39,7 +39,7 @@ const registrar = async (req, res) => {
   }
 };
 
-// LOGIN DE USUARIO (actualizado con ID)
+// LOGIN DE USUARIO 
 const login = async (req, res) => {
   const { correo, contrasenna } = req.body;
 
@@ -66,7 +66,7 @@ const login = async (req, res) => {
     if (estado === 'LOGIN EXITOSO') {
       res.status(200).json({
         message: 'Inicio de sesión exitoso.',
-        idUsuario: idUsuario // ← importante para frontend
+        idUsuario: idUsuario 
       });
     } else if (estado === 'CORREO NO ENCONTRADO') {
       res.status(401).json({ message: 'El correo no está registrado.' });

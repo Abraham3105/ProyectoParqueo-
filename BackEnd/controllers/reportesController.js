@@ -3,7 +3,7 @@ const { OpenDB } = require("../db/oracleConnection");
 
 // Función: cantidad de reservas
 const obtenerCantidadReservas = async (req, res) => {
-  const id_usuario = Number(req.params.id_usuario); // Conversión explícita
+  const id_usuario = Number(req.params.id_usuario); 
 
   if (isNaN(id_usuario)) {
     return res.status(400).json({ error: "ID de usuario inválido" });
@@ -28,7 +28,7 @@ const obtenerCantidadReservas = async (req, res) => {
 
 // Función: cantidad de vehículos
 const obtenerCantidadVehiculos = async (req, res) => {
-  const id_usuario = Number(req.params.id_usuario); // Conversión explícita
+  const id_usuario = Number(req.params.id_usuario); 
 
   if (isNaN(id_usuario)) {
     return res.status(400).json({ error: "ID de usuario inválido" });

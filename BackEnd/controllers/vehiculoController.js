@@ -48,7 +48,7 @@ const obtenerModelosVehiculos = async (req, res) => {
     );
 
     const resultSet = result.outBinds.cursor;
-    const rows = await resultSet.getRows(); // o getRows(n) si quieres limitar
+    const rows = await resultSet.getRows(); 
 
     await resultSet.close();
     await connection.close();
@@ -81,7 +81,7 @@ const listarVehiculosPorUsuario = async (req, res) => {
     );
 
     const resultSet = result.outBinds.cursor;
-    const rows = await resultSet.getRows(); // podés pasarle un número, ej. getRows(100)
+    const rows = await resultSet.getRows(); 
     await resultSet.close();
     await connection.close();
 
